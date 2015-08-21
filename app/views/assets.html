@@ -1,0 +1,48 @@
+<div class="row">
+	<div class="pull-right col-xs-12 col col-sm-6 col-md-4 col-md-offset-4">
+		<input type="text" class="form-control" placeholder="Search by Asset Name or ID" ng-model="searchParam" />		
+	</div>
+	<div class="col-xs-12 col-sm-6 col-md-4">
+		<button ng-click="searchParam = ''" class="btn btn-default btn-block">
+			Refresh
+		</button>
+	</div>
+</div>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				<a href="" ng-click="assetsCtrl.orderBy('dateAdded')">Date Added</a>
+			</th>
+			<th>
+				<a href="" ng-click="assetsCtrl.orderBy('assetId')">Asset Id</a>
+			</th>
+			<th>
+				<a href="" ng-click="assetsCtrl.orderBy('assetName')">Asset Name</a>
+			</th>
+			<th>
+				<a href="" ng-click="assetsCtrl.orderBy('description')">Description</a>
+			</th>
+			<th>
+				<a href="" ng-click="assetsCtrl.orderBy('groups')">Groups</a>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="asset in assetsCtrl.assets | filter:{ assetName: searchParam } | orderBy : assetsCtrl.sort.by : assetsCtrl.sort.reverse">
+			<td>
+				{{ asset.dateAdded }}
+			</td>
+			<td ng-bind="asset.assetId"></td>
+			<td>
+				{{ asset.assetName }}
+			</td>
+			<td>
+				{{ asset.description }}
+			</td>
+			<td>
+				{{ asset.groups }}
+			</td>
+		</tr>
+	</tbody>
+</table>

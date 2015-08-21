@@ -1,0 +1,33 @@
+<div class="row">
+	<div class="col-xs-12">
+		<ul class="nav nav-tabs">
+			<li ng-class="{active: assetTabMenuCtrl.active === 'assets'}">
+				<a href="" ng-click="assetTabMenuCtrl.active = 'assets'">Assets</a>
+			</li>
+			<li ng-class="{active: assetTabMenuCtrl.active === 'assetGroups'}">
+				<a href="" ng-click="assetTabMenuCtrl.active = 'assetGroups'">Asset Groups</a>
+			</li>
+			<li ng-class="{active: assetTabMenuCtrl.active === 'experiments'}">
+				<a href="" ng-click="assetTabMenuCtrl.active = 'experiments'">Experiments</a>
+			</li>
+		</ul>
+
+		<div id="myTabContent" class="tab-content">
+	      <div role="tabpanel" class="tab-pane" ng-class="{active: assetTabMenuCtrl.active === 'assets'}" 
+		      ng-show="assetTabMenuCtrl.active === 'assets'" ng-controller="AssetsCtrl as assetsCtrl" 
+		      ng-include src="'views/assets.html'">
+	      </div>
+	      <div role="tabpanel" class="tab-pane" ng-class="{active: assetTabMenuCtrl.active === 'assetGroups'}" 
+		      ng-show="assetTabMenuCtrl.active === 'assetGroups'" ng-controller="AssetGroupsCtrl as assetGroupsCtrl" 
+		      ng-include src="'views/assetgroups.html'">
+
+	      </div>
+	      <div role="tabpanel" class="tab-pane" ng-class="{active: assetTabMenuCtrl.active === 'experiments'}" 
+		      ng-show="assetTabMenuCtrl.active === 'experiments'" ng-controller="ExperimentsCtrl as experimentsCtrl" 
+		      ng-include src="'views/experiments.html'">
+
+	      </div>
+	    </div>
+	</div>
+
+</div>
