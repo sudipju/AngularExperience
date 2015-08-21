@@ -18,7 +18,7 @@ angular
     $routeProvider
       .when('/', {
         templateUrl: 'views/assettabmenus.html',
-        controller: 'AssetTabMenusCtrl',
+        controller: 'TabMenusCtrl',
         controllerAs: 'assetTabMenuCtrl'
       })
       .when('/about', {

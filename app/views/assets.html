@@ -28,8 +28,8 @@
 			</th>
 		</tr>
 	</thead>
-	<tbody>
-		<tr ng-repeat="asset in assetsCtrl.assets | filter:{ assetName: searchParam } | orderBy : assetsCtrl.sort.by : assetsCtrl.sort.reverse">
+	<tbody class="max-size-scroll-tbody">
+		<tr ng-repeat="asset in assetsCtrl.assets | filter:{ assetName: searchParam } | orderBy : assetsCtrl.sort.by : assetsCtrl.sort.reverse" ng-click="assetsCtrl.edit(asset)" ng-class="{active: asset.active}">
 			<td>
 				{{ asset.dateAdded }}
 			</td>
@@ -46,3 +46,64 @@
 		</tr>
 	</tbody>
 </table>
+
+<button ng-click="assetsCtrl.addNewAsset()" class="btn btn-primary pull-right">Add asset</button>
+
+<div class="row" ng-show="assetsCtrl.editing || assetsCtrl.adding">
+	<div class="col-xs-12">
+		<h3 class="h4" ng-if="assetsCtrl.editing">Viewing Asset: {{assetsCtrl.activeAsset.assetName}}, ID: {{assetsCtrl.activeAsset.assetId}}</h2>
+		<h3 class="h4" ng-if="assetsCtrl.adding">Create a new Asset</span></h2>
+	</div>
+	<div class="col-xs-12">
+		<ul class="nav nav-tabs">
+			<li ng-repeat="settingsTab in assetsCtrl.settingsTabs" ng-class="{ active: assetsCtrl.active === $index }">
+				<a href="" ng-click="assetsCtrl.active = $index">{{settingsTab.name}}</a>
+			</li>
+		</ul>
+
+		<div id="myTabContent" class="tab-content">
+	      <div role="tabpanel" class="tab-pane" 
+	      	  ng-class="{active: assetsCtrl.active === 0}" 
+		      ng-show="assetsCtrl.active === 0">
+		      
+		      <form class="form-horizontal">
+		      	<div ng-if="assetsCtrl.editing" class="form-group">
+		      		<strong class="control-label col-xs-2">Asset ID:</strong>
+		      		<div class="col-xs-10 label-match">
+		      			<span ng-bind="assetsCtrl.activeAsset.assetId"></span>
+		      		</div>
+		      	</div>
+		      	<div class="form-group">
+		      		<label class="control-label col-xs-2" for="asset-name">Asset Name:</label>
+		      		<div class="col-xs-10">
+		      			<input ng-model="assetsCtrl.activeAsset.assetName" type="text" id="asset-name" class="form-control" placeholder="Asset Name" />
+		      		</div>
+		      	</div>
+		      	<div ng-if="assetsCtrl.editing" class="form-group">
+		      		<strong class="control-label col-xs-2">Date added:</strong>
+		      		<div class="col-xs-10 label-match">
+		      			<span ng-bind="assetsCtrl.activeAsset.dateAdded"></span>
+		      		</div>
+		      	</div>
+		      	<div class="form-group">
+		      		<label class="control-label col-xs-2" for="asset-description">Description:</label>
+		      		<div class="col-xs-10">
+		      			<input ng-model="assetsCtrl.activeAsset.description" type="text" id="asset-description" class="form-control" placeholder="Asset Description" />
+		      		</div>
+		      	</div>
+		      </form>
+	      </div>
+	      <div role="tabpanel" class="tab-pane" ng-class="{active: assetsCtrl.active === 1}" 
+		      ng-show="assetsCtrl.active === 1">
+
+	      </div>
+	      <div role="tabpanel" class="tab-pane" ng-class="{active: assetsCtrl.active === 2}" 
+		      ng-show="assetsCtrl.active === 2">
+
+	      </div>
+	    </div>
+   			<button class="btn btn-success" ng-click="assetsCtrl.save()">Save</button>
+   			<button class="btn btn-default" ng-click="assetsCtrl.cancel()">Cancel</button>
+	</div>
+
+</div>	

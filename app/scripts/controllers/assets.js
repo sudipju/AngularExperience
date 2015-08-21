@@ -11,6 +11,14 @@ angular.module('helloworldApp')
   .controller('AssetsCtrl', function () {
     var self = this;
 
+    self.active = 0;
+
+    self.settingsTabs = [
+        {name: "Settings"},
+        {name: "Groups"},
+        {name: "Experiments"}
+    ]
+
     self.assets = [
         {
         	dateAdded: new Date(),
@@ -38,5 +46,33 @@ angular.module('helloworldApp')
         self.sort.by = attribute;
         attributeMap[attribute] = !attributeMap[attribute];                
     };
+
+    self.edit = function(asset) {
+        if(self.activeAsset){
+            self.activeAsset.active = false;
+        }
+        self.activeAsset = asset;
+        self.activeAsset.active = true;
+        self.editing = true;
+        self.adding = false;
+    }
+
+    self.addNewAsset = function() { 
+        if(self.activeAsset){
+            self.activeAsset.active = false;
+        }
+        self.activeAsset = {};
+        self.adding = true;
+        self.editing = false;
+    }
+
+    self.cancel = function() {
+        if(self.activeAsset){
+            self.activeAsset.active = false;
+        }
+        self.adding = false;
+        self.editing = false;
+        self.activeAsset = undefined;
+    }
 
   });
